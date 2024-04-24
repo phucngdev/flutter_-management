@@ -1,4 +1,3 @@
-// item_list_screen.dart
 import 'package:flutter/material.dart';
 import '../models/category.dart';
 
@@ -20,7 +19,7 @@ class _ItemListScreenState extends State<ItemListScreen> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Item List'),
+          title: Text('Category List'),
         ),
         body: ListView.builder(
           itemCount: _items.length,
@@ -41,9 +40,7 @@ class _ItemListScreenState extends State<ItemListScreen> {
                   IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      setState(() {
-                        _items.remove(item);
-                      });
+                      _confirmDeleteDialog(context, item);
                     },
                   ),
                 ],
@@ -66,10 +63,10 @@ class _ItemListScreenState extends State<ItemListScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Add New Item'),
+          title: Text('Add New Category'),
           content: TextField(
             controller: _textEditingController,
-            decoration: InputDecoration(labelText: 'Item Name'),
+            decoration: InputDecoration(labelText: 'Category Name'),
           ),
           actions: [
             TextButton(
@@ -104,10 +101,10 @@ class _ItemListScreenState extends State<ItemListScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Edit Item'),
+          title: Text('Edit Category'),
           content: TextField(
             controller: _editTextEditingController,
-            decoration: InputDecoration(labelText: 'New Item Name'),
+            decoration: InputDecoration(labelText: 'New Category Name'),
           ),
           actions: [
             TextButton(
@@ -132,5 +129,36 @@ class _ItemListScreenState extends State<ItemListScreen> {
         );
       },
     );
+  }
+
+  void _confirmDeleteDialog(BuildContext context, Item item) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Confirm Delete'),
+          content: Text('You want to delete this category?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                _deleteItem(item);
+                Navigator.of(context).pop(true);
+              },
+              child: Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _deleteItem(Item item) {
+    setState(() {
+      _items.remove(item);
+    });
   }
 }

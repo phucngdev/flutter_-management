@@ -25,10 +25,10 @@ class ItemListViewModel {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Add New Item'),
+          title: Text('Add New Category'),
           content: TextField(
             controller: _textEditingController,
-            decoration: InputDecoration(labelText: 'Item Name'),
+            decoration: InputDecoration(labelText: 'Category Name'),
           ),
           actions: [
             TextButton(
@@ -60,10 +60,10 @@ class ItemListViewModel {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Edit Item'),
+          title: Text('Edit Category'),
           content: TextField(
             controller: _editTextEditingController,
-            decoration: InputDecoration(labelText: 'New Item Name'),
+            decoration: InputDecoration(labelText: 'New Category Name'),
           ),
           actions: [
             TextButton(
