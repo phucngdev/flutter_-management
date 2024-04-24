@@ -9,6 +9,7 @@ class ItemListScreen extends StatefulWidget {
 class _ItemListScreenState extends State<ItemListScreen> {
   final List<Item> _items = [];
   final TextEditingController _textEditingController = TextEditingController();
+  String _searchKeyword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,29 @@ class _ItemListScreenState extends State<ItemListScreen> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Category List'),
+          title: TextField(
+            onChanged: (value) {
+              setState(() {
+                _searchKeyword = value;
+              });
+            },
+            decoration: InputDecoration(
+              hintText: 'Search by name...',
+              border: InputBorder.none,
+            ),
+          ),
         ),
         body: ListView.builder(
           itemCount: _items.length,
           itemBuilder: (context, index) {
             final item = _items[index];
+            // Kiểm tra xem tên của mục có chứa từ khóa tìm kiếm hay không
+            final bool isMatched =
+                item.name.toLowerCase().contains(_searchKeyword.toLowerCase());
+            // Nếu mục không khớp với từ khóa tìm kiếm, không hiển thị
+            if (_searchKeyword.isNotEmpty && !isMatched) {
+              return const SizedBox.shrink();
+            }
             return ListTile(
               title: Text(item.name),
               subtitle: Text('ID: ${item.id}'),
@@ -40,7 +58,8 @@ class _ItemListScreenState extends State<ItemListScreen> {
                   IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      _confirmDeleteDialog(context, item);
+                      _confirmDeleteDialog(context,
+                          item); // Thêm hộp thoại xác nhận trước khi xóa
                     },
                   ),
                 ],
