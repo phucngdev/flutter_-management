@@ -58,8 +58,7 @@ class _ItemListScreenState extends State<ItemListScreen> {
                   IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      _confirmDeleteDialog(context,
-                          item); // Thêm hộp thoại xác nhận trước khi xóa
+                      _confirmDeleteDialog(context, item);
                     },
                   ),
                 ],

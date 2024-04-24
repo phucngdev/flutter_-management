@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'views/categoryView.dart'; // Import ItemListScreen
+import 'views/categoryView.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ItemListScreen(), // Use ItemListScreen as home
+      home: ItemListScreen(),
     );
   }
 }

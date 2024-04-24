@@ -1,6 +1,6 @@
 // item_list_view_model.dart
 import 'package:flutter/material.dart';
-import '../models//category.dart';
+import '../models/category.dart';
 
 class ItemListViewModel {
   final List<Item> _items = [];
